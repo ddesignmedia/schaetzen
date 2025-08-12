@@ -1,0 +1,370 @@
+/* HINWEIS: Dieser Code ist DSGVO-konform.
+- Es werden keine externen CSS-Frameworks wie Tailwind CSS geladen.
+- Es werden keine externen Schriftarten wie Google Fonts geladen.
+- Alle Stile sind in diesem <style>-Block enthalten.
+- Die verwendete Schriftart ist eine Standard-Systemschriftart (monospace).
+*/
+
+/* Basis-Reset & Standardwerte */
+* {
+margin: 0;
+padding: 0;
+box-sizing: border-box;
+}
+
+body {
+/* Standard-Monospace-Schriftarten, die auf den meisten Systemen verfügbar sind. Keine Google Fonts. */
+font-family: 'Consolas', 'Monaco', 'Lucida Console', monospace;
+background-color: #0d0221; /* Dunkelvioletter/blauer Hintergrund */
+color: #00f0ff; /* Neon-Cyan-Text */
+display: flex;
+align-items: center;
+justify-content: center;
+min-height: 100vh;
+padding: 1rem;
+text-shadow: 0 0 5px #00f0ff, 0 0 10px #00f0ff; /* Neon-Leuchten für Text */
+}
+
+/* Spiel-Container */
+.game-container {
+background-color: #241b4f; /* Dunkleres Lila, etwas heller als der Body */
+padding: 1.5rem;
+border-radius: 0.25rem; /* Schärfere Kanten */
+border: 2px solid #ff00ff; /* Neon-Magenta-Rand */
+box-shadow: 0 0 15px #ff00ff, inset 0 0 10px rgba(255, 0, 255, 0.3); /* Neon-Magenta-Leuchten und innerer Schatten */
+width: 100%;
+max-width: 48rem; /* Etwas breiter für Retro-Gefühl */
+}
+
+/* Überschrift */
+.game-title {
+font-size: 4rem;
+font-weight: 700;
+text-align: center;
+margin-bottom: 2rem;
+color: #ffff00; /* Neon-Gelb */
+text-shadow: 0 0 5px #ffff00, 0 0 10px #ffff00, 0 0 15px #ff00ff; /* Gelbes und magenta Leuchten */
+letter-spacing: 2px;
+line-height: 1.1;
+}
+
+/* Punkteanzeige */
+.score-area {
+display: flex;
+justify-content: space-around;
+margin-bottom: 1.5rem;
+font-size: 1.125rem;
+font-weight: 600;
+}
+
+.score-box {
+text-align: center;
+padding: 0.75rem;
+border-radius: 0.25rem;
+border: 1px solid #00f0ff; /* Cyan-Rand */
+width: 9rem;
+background-color: rgba(0, 0, 0, 0.3); /* Halbtransparenter Schwarz */
+}
+
+.score-label {
+    display: block;
+    font-size: 0.875rem;
+    margin-bottom: 0.25rem;
+    color: #ff00ff; /* Neon-Magenta für Labels */
+    text-shadow: 0 0 5px #ff00ff;
+}
+
+.score-value {
+display: block;
+font-size: 1.75rem; /* Größerer Punktewert */
+color: #00ff00; /* Neon-Grün für Punkte */
+text-shadow: 0 0 5px #00ff00, 0 0 10px #00ff00;
+}
+
+/* Fragenbereich */
+#question-area {
+margin-bottom: 1.5rem;
+padding: 1rem;
+background-color: rgba(0,0,0,0.4);
+border-radius: 0.25rem;
+border: 1px solid #00f0ff;
+min-height: 6rem;
+display: flex;
+align-items: center;
+justify-content: center;
+text-align: center;
+}
+
+#question-text {
+font-size: 1.1rem;
+font-weight: 500;
+color: #ffffff; /* Weißer Text für besseren Kontrast */
+text-shadow: 0 0 3px #00f0ff;
+line-height: 1.4;
+}
+
+/* Eingabebereich */
+#input-area {
+display: grid;
+grid-template-columns: 1fr;
+gap: 1rem;
+margin-bottom: 1.5rem;
+}
+
+#input-area label {
+display: block;
+font-size: 0.875rem;
+font-weight: 500;
+color: #ff00ff; /* Neon-Magenta */
+margin-bottom: 0.25rem;
+text-shadow: 0 0 5px #ff00ff;
+}
+
+#input-area input[type="number"] {
+width: 100%;
+padding: 0.6rem 0.75rem;
+border: 1px solid #00f0ff;
+border-radius: 0.25rem;
+background-color: #000000;
+color: #00ff00; /* Neon-Grüner Text im Input */
+font-family: inherit; /* Erbt die Monospace-Schriftart vom Body */
+font-size: 1rem;
+text-shadow: 0 0 3px #00ff00;
+}
+#input-area input[type="number"]::placeholder {
+    color: #008f8f; /* Dunkleres Cyan für Platzhalter */
+    text-shadow: none;
+}
+
+#input-area input[type="number"]:focus {
+    outline: none;
+    border-color: #ffff00; /* Neon-Gelber Fokus-Rand */
+    box-shadow: 0 0 10px #ffff00; /* Neon-Gelbes Leuchten bei Fokus */
+}
+
+/* Button-Bereich */
+.buttons-area {
+text-align: center;
+margin-bottom: 1.5rem;
+}
+.buttons-area button {
+    padding: 0.75rem 1.5rem;
+    font-weight: 700;
+    border-radius: 0.25rem;
+    color: #0d0221;
+    border: 2px solid;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out, transform 0.1s ease, box-shadow 0.2s ease;
+    font-size: 0.9rem;
+    margin-left: 0.5rem;
+    margin-right: 0.5rem;
+    text-shadow: none;
+    letter-spacing: 1px;
+}
+.buttons-area button:first-child { margin-left: 0; }
+.buttons-area button:last-child { margin-right: 0; }
+
+#submit-guess {
+background-color: #00ff00; /* Neon-Grün */
+border-color: #008000;
+box-shadow: 0 0 10px #00ff00;
+}
+#submit-guess:hover {
+background-color: #33ff33;
+box-shadow: 0 0 15px #00ff00, 0 0 20px #00ff00;
+transform: translateY(-2px);
+}
+
+#next-question {
+background-color: #00f0ff; /* Neon-Cyan */
+border-color: #007c80;
+box-shadow: 0 0 10px #00f0ff;
+}
+#next-question:hover {
+background-color: #33ffff;
+box-shadow: 0 0 15px #00f0ff, 0 0 20px #00f0ff;
+transform: translateY(-2px);
+}
+
+/* Ergebnisbereich */
+#result-area {
+margin-top: 1.5rem;
+padding: 1rem;
+background-color: rgba(0,0,0,0.3);
+border-radius: 0.25rem;
+border: 1px solid #ffff00;
+text-align: center;
+min-height: 5rem;
+display: flex;
+align-items: center;
+justify-content: center;
+}
+
+#result-text {
+font-size: 1rem;
+font-weight: 500;
+color: #ffff00;
+text-shadow: 0 0 5px #ffff00;
+line-height: 1.5;
+}
+#result-text strong {
+    font-weight: 700;
+    color: #00ff00; /* Neon-Grün für die Antwort */
+    text-shadow: 0 0 5px #00ff00;
+}
+
+/* Game-Over-Bereich */
+#game-over-area {
+margin-top: 1.5rem;
+padding: 1rem;
+background-color: rgba(0,0,0,0.3);
+border-radius: 0.25rem;
+border: 1px solid #ff0000;
+text-align: center;
+}
+
+#game-over-area h2 {
+font-size: 1.5rem;
+font-weight: 700;
+color: #ff0000;
+margin-bottom: 0.5rem;
+text-shadow: 0 0 5px #ff0000, 0 0 10px #ff0000;
+}
+
+#final-score {
+font-size: 1.125rem;
+color: #ff8c00; /* Dunkelorange */
+margin-bottom: 1rem;
+text-shadow: 0 0 5px #ff8c00;
+}
+
+#restart-game {
+padding: 0.75rem 1.5rem;
+background-color: #ff00ff; /* Neon-Magenta */
+color: #0d0221;
+font-weight: 700;
+border-radius: 0.25rem;
+border: 2px solid #800080;
+cursor: pointer;
+transition: background-color 0.2s ease-in-out, transform 0.1s ease, box-shadow 0.2s ease;
+font-size: 0.9rem;
+text-shadow: none;
+box-shadow: 0 0 10px #ff00ff;
+letter-spacing: 1px;
+}
+#restart-game:hover {
+background-color: #ff33ff;
+box-shadow: 0 0 15px #ff00ff, 0 0 20px #ff00ff;
+transform: translateY(-2px);
+}
+
+/* Hilfsklassen */
+.hidden {
+display: none !important;
+}
+
+/* Eigene Nachrichtenbox */
+.message-box-overlay {
+position: fixed;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+background-color: rgba(0, 0, 0, 0.7);
+display: flex;
+justify-content: center;
+align-items: center;
+z-index: 1000;
+opacity: 0;
+visibility: hidden;
+transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+.message-box-overlay.visible {
+opacity: 1;
+visibility: visible;
+}
+.message-box {
+background-color: #1a1139;
+padding: 2rem;
+border-radius: 0.25rem;
+border: 2px solid #00f0ff;
+box-shadow: 0 0 15px #00f0ff;
+text-align: center;
+max-width: 90%;
+width: 400px;
+}
+#message-box-text {
+    font-size: 1rem;
+    color: #ffffff;
+    text-shadow: 0 0 3px #00f0ff;
+}
+.message-box button {
+margin-top: 1.5rem;
+padding: 0.6rem 1.2rem;
+border-radius: 0.25rem;
+background-color: #00f0ff;
+color: #0d0221;
+font-weight: 700;
+transition: background-color 0.2s ease, transform 0.1s ease;
+border: 1px solid #007c80;
+cursor: pointer;
+font-size: 0.875rem;
+text-shadow: none;
+}
+.message-box button:hover {
+background-color: #33ffff;
+transform: translateY(-1px);
+}
+
+/* Responsive Design */
+@media (min-width: 768px) {
+.game-title {
+    font-size: 5rem;
+}
+.score-area {
+    font-size: 1.25rem;
+}
+.score-box {
+    padding: 1rem;
+    width: 11rem;
+}
+    .score-label {
+        font-size: 1rem;
+    }
+    .score-value {
+        font-size: 2rem;
+    }
+#question-text {
+    font-size: 1.25rem;
+}
+#input-area {
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+}
+    .buttons-area button {
+        padding: 0.8rem 1.8rem;
+        font-size: 1rem;
+    }
+    #result-text {
+        font-size: 1.125rem;
+    }
+    #game-over-area {
+        padding: 1.5rem;
+    }
+    #game-over-area h2 {
+        font-size: 1.75rem;
+    }
+    #final-score {
+        font-size: 1.25rem;
+    }
+    #restart-game {
+        padding: 0.8rem 1.8rem;
+        font-size: 1rem;
+    }
+    #message-box-text {
+        font-size: 1.125rem;
+    }
+    .message-box button {
+        font-size: 1rem;
+    }
+}
