@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>8-BIT ESTIMATOR (Offline & DSGVO-konform)</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="game-container">
+
+        <h1 class="game-title">8-BIT ESTIMATOR</h1>
+
+        <div class="score-area">
+            <div class="score-box">
+                <span class="score-label">Player ONE</span>
+                <span id="score1" class="score-value">0</span>
+            </div>
+            <div class="score-box">
+                <span class="score-label">Player TWO</span>
+                <span id="score2" class="score-value">0</span>
+            </div>
+        </div>
+
+        <div id="question-area">
+            <p id="question-text">Frage wird geladen...</p>
+        </div>
+
+        <div id="input-area">
+            <div>
+                <label for="guess1">Player ONE Schätzung:</label>
+                <input type="number" id="guess1" name="guess1" placeholder="Deine Schätzung">
+            </div>
+            <div>
+                <label for="guess2">Player TWO Schätzung:</label>
+                <input type="number" id="guess2" name="guess2" placeholder="Deine Schätzung">
+            </div>
+        </div>
+
+        <div class="buttons-area">
+            <button id="submit-guess">
+                SCHÄTZEN!
+            </button>
+            <button id="next-question" class="hidden">
+                NÄCHSTE FRAGE
+            </button>
+        </div>
+
+        <div id="result-area" class="hidden">
+            <p id="result-text"></p>
+        </div>
+
+        <div id="game-over-area" class="hidden">
+            <h2>GAME OVER!</h2>
+            <p id="final-score"></p>
+            <button id="restart-game">
+                NEUES SPIEL?
+            </button>
+        </div>
+    </div>
+
+    <div id="message-box-overlay" class="message-box-overlay">
+        <div class="message-box">
+            <p id="message-box-text"></p>
+            <button id="message-box-ok">OK</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
